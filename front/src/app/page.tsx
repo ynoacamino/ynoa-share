@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@uidotdev/usehooks';
 import { useRouter } from 'next/navigation';
+import { WS_BACKEND_URL } from '@/config/global';
 
 export default function Home() {
   const socket = useRef<WebSocket>();
@@ -14,7 +15,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    socket.current = new WebSocket('ws://localhost:8080/ws');
+    socket.current = new WebSocket(`${WS_BACKEND_URL}/ws`);
 
     socket.current.onopen = () => {
       setIsConnected(true);
